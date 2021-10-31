@@ -21,6 +21,9 @@ namespace PetMating.Api.Models
         public AnimalType AmimalType { get; set; }
 
         [Required]
+        public Sex Sex { get; set; }
+
+        [Required]
         public bool Pedigree { get; set; }
 
         [Required]
@@ -34,10 +37,12 @@ namespace PetMating.Api.Models
         [Required]
         public DateTime DOB { get; set; }
 
-        [Required]
-        public string Sex { get; set; }
-
         public string Image { get; set; }
+
+        public string UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         [NotMapped]
         [Display(Name = "Full Name")]
@@ -46,6 +51,12 @@ namespace PetMating.Api.Models
         [NotMapped]
         public int Age { get { return (DOB.Year - DateTime.Now.Year); } }
 
+    }
+
+    public enum Sex
+    {
+        Male,
+        Female
     }
 
     public enum Colour

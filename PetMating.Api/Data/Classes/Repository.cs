@@ -78,7 +78,7 @@ namespace PetMating.Api.Data.Classes
         //     return query.ToList();
         // }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -95,7 +95,7 @@ namespace PetMating.Api.Data.Classes
                 }
             }
 
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
 
         public void Remove(int id)

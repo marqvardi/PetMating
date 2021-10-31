@@ -10,8 +10,8 @@ using PetMating.Api.Data;
 namespace PetMating.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211017122718_AddedDbFor4UserAnimalAddress")]
-    partial class AddedDbFor4UserAnimalAddress
+    [Migration("20211025201249_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -280,9 +280,8 @@ namespace PetMating.Api.Migrations
                     b.Property<bool>("Pedigree")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Sex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -375,9 +374,11 @@ namespace PetMating.Api.Migrations
 
             modelBuilder.Entity("PetMating.Api.Models.Animal", b =>
                 {
-                    b.HasOne("PetMating.Api.Models.User", null)
+                    b.HasOne("PetMating.Api.Models.User", "User")
                         .WithMany("Animal")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PetMating.Api.Models.User", b =>

@@ -30,10 +30,24 @@ namespace PetMating.Api.Data.Classes
             return Enum.GetValues(typeof(HairType)).Cast<HairType>().ToDictionary(t => (int)t, t => t.ToString());
         }
 
-        public void Update(Animal animal)
+        public async void Update(Animal animal)
         {
-            var objFromDb = _db.Animal.FirstOrDefault(d => d.Id == animal.Id);
-            _db.Entry(animal).State = EntityState.Modified;
+            var objFromDb = await _db.Animal.FirstOrDefaultAsync(d => d.Id == animal.Id);
+
+            objFromDb.AmimalType = animal.AmimalType;
+            objFromDb.Colour = animal.Colour;
+            objFromDb.DOB = animal.DOB;
+            objFromDb.Eyes = animal.Eyes;
+            objFromDb.FirstName = animal.FirstName;
+            objFromDb.LastName = animal.LastName;
+            objFromDb.HairType = animal.HairType;
+            objFromDb.Pedigree = animal.Pedigree;
+
+            if (objFromDb.Image != null)
+            {
+                objFromDb.Image = animal.Image;
+            }
+            // _db.Entry(animal).State = EntityState.Modified;
             _db.SaveChanges();
         }
     }

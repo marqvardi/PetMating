@@ -278,9 +278,8 @@ namespace PetMating.Api.Migrations
                     b.Property<bool>("Pedigree")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Sex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -373,9 +372,11 @@ namespace PetMating.Api.Migrations
 
             modelBuilder.Entity("PetMating.Api.Models.Animal", b =>
                 {
-                    b.HasOne("PetMating.Api.Models.User", null)
+                    b.HasOne("PetMating.Api.Models.User", "User")
                         .WithMany("Animal")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PetMating.Api.Models.User", b =>

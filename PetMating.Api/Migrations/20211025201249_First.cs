@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetMating.Api.Migrations
 {
-    public partial class AddedDbFor4UserAnimalAddress : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -102,11 +102,11 @@ namespace PetMating.Api.Migrations
                     Colour = table.Column<int>(type: "int", nullable: false),
                     HairType = table.Column<int>(type: "int", nullable: false),
                     AmimalType = table.Column<int>(type: "int", nullable: false),
+                    Sex = table.Column<int>(type: "int", nullable: false),
                     Pedigree = table.Column<bool>(type: "bit", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Sex = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },

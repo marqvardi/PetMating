@@ -14,7 +14,7 @@ namespace PetMating.Api.Data.Interface
             string includeProperties = null
             );
 
-        T GetFirstOrDefault(
+        Task<T> GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
             string includeProperties = null
             );

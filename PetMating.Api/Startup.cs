@@ -55,6 +55,7 @@ namespace PetMating.Api
             builder.AddSignInManager<SignInManager<User>>();
 
             services.AddCors();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -74,7 +75,10 @@ namespace PetMating.Api
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PetMating.Api", Version = "v1" });
