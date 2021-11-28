@@ -1,0 +1,15 @@
+.buttons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  button {
+    margin: 0 10px;
+    padding: 4px 8px;
+  }
+}
+
+.input {
+  background-color: red;
+}

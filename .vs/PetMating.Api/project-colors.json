@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e3a5d90e-23bf-4960-864f-d37cbea5f297": {
+      "ProjectGuid": "e3a5d90e-23bf-4960-864f-d37cbea5f297",
+      "DisplayName": "PetMating.Api",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

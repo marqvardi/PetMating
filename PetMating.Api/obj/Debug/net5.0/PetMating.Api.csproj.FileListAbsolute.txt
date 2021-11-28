@@ -84,7 +84,6 @@ C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\PetMating.A
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\PetMating.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\PetMating.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\staticwebassets\PetMating.Api.StaticWebAssets.Manifest.cache
-C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\staticwebassets\PetMating.Api.StaticWebAssets.xml
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\scopedcss\bundle\PetMating.Api.styles.css
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\PetMating.Api.RazorTargetAssemblyInfo.cache
 C:\Users\marqu\source\repos\PetMating\petmating.api\obj\Debug\net5.0\PetMating.Api.csproj.CopyComplete
@@ -125,3 +124,5 @@ C:\Users\marqu\source\repos\PetMating\petmating.api\bin\Debug\net5.0\Microsoft.A
 C:\Users\marqu\source\repos\PetMating\petmating.api\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\marqu\source\repos\PetMating\petmating.api\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\marqu\source\repos\PetMating\petmating.api\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\marqu\source\repos\PetMating\petmating.api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Certificate.dll
+C:\Users\marqu\source\repos\PetMating\PetMating.Api\bin\Debug\net5.0\Data\AnimalBreeds.json

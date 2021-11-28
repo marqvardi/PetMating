@@ -291,6 +291,24 @@ namespace PetMating.Api.Migrations
                     b.ToTable("Animal");
                 });
 
+            modelBuilder.Entity("PetMating.Api.Models.UserLikePet", b =>
+                {
+                    b.Property<Guid>("AnimalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsFavourite")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AnimalId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLikePet");
+                });
+
             modelBuilder.Entity("PetMating.Api.Models.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -375,6 +393,25 @@ namespace PetMating.Api.Migrations
                     b.HasOne("PetMating.Api.Models.User", "User")
                         .WithMany("Animal")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PetMating.Api.Models.UserLikePet", b =>
+                {
+                    b.HasOne("PetMating.Api.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetMating.Api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
 
                     b.Navigation("User");
                 });

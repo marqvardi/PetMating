@@ -53,12 +53,20 @@ namespace PetMating.Api.Controllers
             var completed = await _unitOfWork.Complete();
 
             var userToReturn = _mapper.Map<UserDetailsToReturnDto>(userToCreate);
+            userToReturn.Password = userForRegisterDto.Password;
 
             if (result.Succeeded)
             {
                 return Created("login", userToReturn);
             }
-            return BadRequest(result.Errors);
+            else
+            {
+                List<IdentityError> errorList = result.Errors.ToList();
+                var errors = string.Join(", ", errorList.Select(e => e.Description));
+
+                return BadRequest(errors);
+            }
+
         }
 
         [AllowAnonymous]
@@ -67,7 +75,7 @@ namespace PetMating.Api.Controllers
         {
             var user = await _userManager.FindByEmailAsync(userLogInDto.Email);
 
-            if (user == null) return NotFound();
+            if (user == null) return NotFound("User is not registered");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, userLogInDto.Password, false);
 

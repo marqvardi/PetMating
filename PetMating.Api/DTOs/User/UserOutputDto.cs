@@ -1,3 +1,5 @@
+using PetMating.Api.DTOs.AddressDtos;
+
 namespace PetMating.Api.DTOs.User
 {
     public class UserOutputDto
@@ -8,5 +10,7 @@ namespace PetMating.Api.DTOs.User
         public string LastName { get; set; }
         public string Email { get; set; }
         public string ImageUrl { get; set; }
+
+        public AddressDto Address { get; set; }
     }
 }

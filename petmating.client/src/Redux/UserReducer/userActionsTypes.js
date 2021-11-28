@@ -1,0 +1,6 @@
+export const userActionTypes = {
+  CURRENT_USER: "CURRENT_USER",
+  SIGN_OUT_USER: "SIGN_OUT_USER",
+  CREATE_USER: "CREATE_USER",
+  UPDATE_USER: "UPDATE_USER",
+};

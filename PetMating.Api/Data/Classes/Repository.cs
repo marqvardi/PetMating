@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace PetMating.Api.Data.Classes
 {
     public class Repository<T> where T : class
@@ -44,6 +45,36 @@ namespace PetMating.Api.Data.Classes
                     query = query.Include(includedProperty);
                 }
             }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).ToListAsync();
+            }
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllWithInclude(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null, string thenIncludeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (thenIncludeProperties != null && includeProperties != null)
+            {
+                query = query.Include(includeProperties).Include(includeProperties + '.' + thenIncludeProperties);
+            }
+
+            // if (includeProperties != null)
+            // {
+            //     foreach (var includedProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            //     {
+            //         query = query.Include(includedProperty);
+            //     }
+            // }
 
             if (orderBy != null)
             {

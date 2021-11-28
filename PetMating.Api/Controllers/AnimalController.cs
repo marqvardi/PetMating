@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PetMating.Api.Data.Interface;
 using PetMating.Api.DTOs.Animal;
 using PetMating.Api.Helpers;
 using PetMating.Api.Models;
+using Newtonsoft.Json;
 
 namespace PetMating.Api.Controllers
 {
@@ -18,26 +23,46 @@ namespace PetMating.Api.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        public AnimalController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager)
+        private readonly Data.ApplicationDbContext _dbContext;
+        public AnimalController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager, Data.ApplicationDbContext dbContext)
         {
+            this._dbContext = dbContext;
             this._userManager = userManager;
             this._mapper = mapper;
             this._unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<Animal>>> GetAllAnimals([FromQuery] PageSpecsParams pageSpecsParams)
+        // [EnableCors("_myAllowSpecificOrigins")]
+        public async Task<ActionResult<Pagination<ReturnAnimalDto>>> GetAllAnimals([FromQuery] PageSpecsParams pageSpecsParams)
         {
-            var animalFromDb = await _unitOfWork.Animal.GetAll(null, f => f.OrderBy(d => d.FirstName), "User");
+            if (pageSpecsParams.Search == null)
+            {
+                pageSpecsParams.Search = "";
+            }
 
-            var animalPaged = Pagination<Animal>.PagedList(animalFromDb, pageSpecsParams);
+            // var teste = Path.GetDirectoryName("data/AnimalBreeds.json");
+            // StreamReader r = new StreamReader(Path.GetDirectoryName("data/AnimalBreeds.json"));
+            // string jsonString = r.ReadToEnd();
+            // var m = JsonConvert.DeserializeObject<object>(jsonString);
+
+
+            var animalFromDb = await _unitOfWork.Animal.GetAllWithInclude(null, null, "User", "Address");
+
+            // var animalFromDb = await _unitOfWork.Animal.GetAll(c => c.FirstName.Contains(pageSpecsParams.Search.ToLower()) ||
+            //                     c.LastName.Contains(pageSpecsParams.Search.ToLower()),
+            //                      f => f.OrderBy(d => d.FirstName), "User");
+
+            var returnAnimal = _mapper.Map<IReadOnlyList<ReturnAnimalDto>>(animalFromDb);
+
+            var animalPaged = Pagination<ReturnAnimalDto>.PagedList(returnAnimal, pageSpecsParams);
 
             if (animalFromDb.Count() <= 0)
             {
                 return NotFound("Not found");
             }
 
-            return Ok(new Pagination<Animal>(pageSpecsParams.PageIndex, pageSpecsParams.PageSize, animalFromDb.Count(), animalPaged));
+            return Ok(new Pagination<ReturnAnimalDto>(pageSpecsParams.PageIndex, pageSpecsParams.PageSize, returnAnimal.Count(), animalPaged));
 
 
             // var list = Enum.GetValues(typeof(Colour)).Cast<Colour>().ToDictionary(t => (int)t, t => t.ToString());

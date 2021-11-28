@@ -13,12 +13,13 @@ namespace PetMating.Api.Data.Classes
             Customer = new CustomerRepository(db);
             Animal = new AnimalRepository(db);
             User = new UserRepository(db);
+            UserLikePet = new UserLikePetRepository(db);
         }
 
         public ICustomerRepository Customer { get; private set; }
-
         public IAnimalRepository Animal { get; private set; }
         public IUserRepository User { get; private set; }
+        public IUserLikePetRepository UserLikePet { get; private set; }
 
         public async Task<int> Complete()
         {

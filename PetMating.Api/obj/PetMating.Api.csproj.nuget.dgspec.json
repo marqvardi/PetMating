@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marqu\\source\\repos\\PetMating\\PetMating.Api\\PetMating.Api.csproj": {}
+    "C:\\Users\\marqu\\source\\repos\\PetMating\\petmating.api\\PetMating.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marqu\\source\\repos\\PetMating\\PetMating.Api\\PetMating.Api.csproj": {
+    "C:\\Users\\marqu\\source\\repos\\PetMating\\petmating.api\\PetMating.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marqu\\source\\repos\\PetMating\\PetMating.Api\\PetMating.Api.csproj",
+        "projectUniqueName": "C:\\Users\\marqu\\source\\repos\\PetMating\\petmating.api\\PetMating.Api.csproj",
         "projectName": "PetMating.Api",
-        "projectPath": "C:\\Users\\marqu\\source\\repos\\PetMating\\PetMating.Api\\PetMating.Api.csproj",
+        "projectPath": "C:\\Users\\marqu\\source\\repos\\PetMating\\petmating.api\\PetMating.Api.csproj",
         "packagesPath": "C:\\Users\\marqu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marqu\\source\\repos\\PetMating\\PetMating.Api\\obj\\",
+        "outputPath": "C:\\Users\\marqu\\source\\repos\\PetMating\\petmating.api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\marqu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[8.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Certificate": {
+              "target": "Package",
+              "version": "[5.0.11, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -95,6 +99,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.12, 5.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -103,7 +113,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

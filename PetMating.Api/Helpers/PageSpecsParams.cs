@@ -6,7 +6,7 @@ namespace PetMating.Api.Helpers
         public int PageIndex { get; set; } = 1;
         public string Sort { get; set; }
         private int _pageSize = 10;
-        private string _search;
+        public string _search;
 
         public int PageSize
         {
@@ -17,7 +17,7 @@ namespace PetMating.Api.Helpers
         public string Search
         {
             get => _search;
-            set => _search = value.ToLower();
+            set => _search = value;
         }
     }
 }

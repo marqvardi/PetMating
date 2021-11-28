@@ -14,6 +14,11 @@ namespace PetMating.Api.Data.Interface
             string includeProperties = null
             );
 
+        Task<IEnumerable<T>> GetAllWithInclude(Expression<Func<T, bool>> filter = null,
+      Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+      string includeProperties = null, string thenIncludeProperties = null
+      );
+
         Task<T> GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
             string includeProperties = null

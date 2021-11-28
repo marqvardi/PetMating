@@ -28,6 +28,7 @@ namespace PetMating.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -54,7 +55,20 @@ namespace PetMating.Api
 
             builder.AddSignInManager<SignInManager<User>>();
 
-            services.AddCors();
+            // services.AddCors();
+
+            services.AddCors(options =>
+             {
+                 options.AddPolicy(name: MyAllowSpecificOrigins,
+                                   builder =>
+                                   {
+                                       builder.WithOrigins("http://localhost:3000"
+                                                           // "http://www.contoso.com"
+                                                           ).AllowAnyHeader().AllowAnyMethod();
+                                   });
+             });
+
+            services.AddMvc();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -71,7 +85,7 @@ namespace PetMating.Api
             services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -95,14 +109,18 @@ namespace PetMating.Api
                 // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PetMating.Api v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            // app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

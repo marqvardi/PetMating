@@ -3,6 +3,9 @@ using PetMating.Api.Data.Interface;
 using PetMating.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace PetMating.Api.Data.Classes
 {
@@ -13,8 +16,8 @@ namespace PetMating.Api.Data.Classes
         public CustomerRepository(ApplicationDbContext db) : base(db)
         {
             this._db = db;
-
         }
+
         public void Update(Customer customer)
         {
             // var objFromDb = _db.Customer.FirstOrDefault(d => d.Id == customer.Id);

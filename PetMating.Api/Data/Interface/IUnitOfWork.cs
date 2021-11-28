@@ -18,6 +18,9 @@ namespace PetMating.Api.Data.Interface
         IUserRepository User { get; }
 
         IAnimalRepository Animal { get; }
+
+        IUserLikePetRepository UserLikePet { get; }
+
         void Save();
         Task<int> Complete();
     }
